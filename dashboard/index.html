@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Token Launch Radar — pre-token protocols ranked by implied value</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="radar.css">
+</head>
+<body>
+<header class="masthead">
+  <div class="masthead-in">
+    <div>
+      <p class="kicker">MAKE.FUN · TOKEN-RADAR-01</p>
+      <h1>Token Launch Radar</h1>
+      <p class="sub">Protocols that record no token yet, ranked by what a token would be worth
+      if their record stayed as it is — and what to do about each one before it launches.</p>
+    </div>
+    <div class="mast-stats" id="mastStats"></div>
+  </div>
+</header>
+
+<section class="model-note">
+  <h2>How the board prices a protocol with no token</h2>
+  <p>Every implied value is derived from the snapshot's own figures, never from a list of names.
+  Protocols whose token already trades give a market-cap-to-TVL multiple for their category
+  (the median, shrunk toward the global median by sample count and winsorised at 10× it, so one
+  outlier cannot price a whole category; the global median here is <b id="globalMult">—</b>). A pre-token protocol is priced at
+  <b>TVL × its category multiple</b>, adjusted by a momentum factor from its 7-day TVL change
+  (clamped, so one wild week cannot dominate) and a track-record factor from how long it has run
+  with no token. Protocols with a live token are the evidence base — they are counted, never ranked.
+  Click any row for the full arithmetic and its farm plan.</p>
+</section>
+
+<main>
+  <div class="controls">
+    <label class="ctl grow">Search
+      <input id="q" type="text" placeholder="protocol name or slug…" autocomplete="off">
+    </label>
+    <label class="ctl">Category
+      <select id="cat"><option value="">All categories</option></select>
+    </label>
+    <label class="ctl check">
+      <input id="watchOnly" type="checkbox"> Watchlist only
+    </label>
+    <span class="count" id="rowCount"></span>
+  </div>
+
+  <div id="boardView">
+    <table class="board">
+      <thead>
+        <tr>
+          <th data-sort="rank" class="num">Rank</th>
+          <th data-sort="name">Protocol</th>
+          <th data-sort="category">Category</th>
+          <th data-sort="tvl_usd" class="num">TVL</th>
+          <th data-sort="change_7d" class="num">7d TVL</th>
+          <th data-sort="multiple" class="num">Multiple</th>
+          <th data-sort="implied_value_usd" class="num">Implied value</th>
+          <th>Signal</th>
+        </tr>
+      </thead>
+      <tbody id="rows"></tbody>
+    </table>
+    <p class="hint">Sort by any column. Click a row for its detail view and farm plan.</p>
+  </div>
+
+  <article id="detailView" hidden></article>
+</main>
+
+<footer>
+  <p id="footLine"></p>
+  <p>Implied values are this board's own claim from a sealed DefiLlama snapshot — a pricing of the
+  record as it stands, not a prediction that a token will be issued. “Records no token” describes the
+  snapshot's record, nothing more.</p>
+</footer>
+
+<script src="../data.js"></script>
+<script src="radar.js"></script>
+</body>
+</html>
